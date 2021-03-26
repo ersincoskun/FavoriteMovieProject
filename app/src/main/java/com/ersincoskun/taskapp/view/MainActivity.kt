@@ -1,7 +1,8 @@
-package com.ersincoskun.taskapp
+package com.ersincoskun.taskapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ersincoskun.taskapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
