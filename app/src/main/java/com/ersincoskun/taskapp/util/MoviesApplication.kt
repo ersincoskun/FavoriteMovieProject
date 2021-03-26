@@ -1,4 +1,4 @@
-package com.ersincoskun.taskapp
+package com.ersincoskun.taskapp.util
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
