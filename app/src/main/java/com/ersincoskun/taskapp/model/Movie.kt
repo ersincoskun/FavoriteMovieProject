@@ -2,7 +2,7 @@ package com.ersincoskun.taskapp.model
 
 import androidx.room.Entity
 
-@Entity(tableName = "movie")
+@Entity(tableName = "movies")
 data class Movie(
     val adult: Boolean,
     val id: Long,
