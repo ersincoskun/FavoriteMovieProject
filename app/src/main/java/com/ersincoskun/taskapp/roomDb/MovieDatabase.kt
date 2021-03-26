@@ -1,4 +1,4 @@
-package com.ersincoskun.taskapp.room
+package com.ersincoskun.taskapp.roomDb
 
 import androidx.room.Database
 import com.ersincoskun.taskapp.model.Movie

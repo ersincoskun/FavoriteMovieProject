@@ -1,4 +1,4 @@
-package com.ersincoskun.taskapp.room
+package com.ersincoskun.taskapp.roomDb
 
 import androidx.room.Dao
 import androidx.room.Insert
