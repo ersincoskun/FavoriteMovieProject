@@ -10,7 +10,7 @@ import com.ersincoskun.taskapp.model.Movie
 interface MovieDao {
 
     @Insert
-    suspend fun saveAllMovies(vararg movies: Movie)
+    suspend fun insertMovies(vararg movies: Movie)
 
     @Query("SELECT * FROM movies WHERE uuid = :id")
     suspend fun getMovie(id: Long): Movie
