@@ -12,8 +12,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var fragmentFactory: MovieFragmentFactory
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
+        supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_main)
+
     }
 }

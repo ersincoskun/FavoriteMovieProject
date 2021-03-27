@@ -20,9 +20,10 @@ class MovieRepository @Inject constructor(
         return dao.getMovie(id)
     }
 
-    override fun getMoviesFromDB(): List<Movie> {
+    override suspend fun getMoviesFromDB(): List<Movie> {
         return dao.getMoviesFromDB()
     }
+
 
     override suspend fun getMoviesFromAPI(): Resource<Response> {
         return try {
@@ -38,5 +39,9 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Resource.error("No Data", null)
         }
+    }
+
+    override suspend fun deleteAllMovies() {
+        dao.deleteAllMovies()
     }
 }

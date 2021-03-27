@@ -28,7 +28,9 @@ object Module {
     @Provides
     fun injectRoomDb(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, MovieDatabase::class.java, "MoviesDb").build()
+    ) = Room.databaseBuilder(context, MovieDatabase::class.java, "MoviesDb")
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
@@ -39,6 +41,7 @@ object Module {
     fun injectRetrofit(): RetrofitAPI =
         Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL)
             .build().create(RetrofitAPI::class.java)
+
 
     @Singleton
     @Provides
@@ -52,6 +55,5 @@ object Module {
             RequestOptions().placeholder(com.ersincoskun.taskapp.R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background)
         )
-
 
 }

@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
 import com.ersincoskun.taskapp.databinding.FragmentMovieDetailBinding
+import com.ersincoskun.taskapp.viewmodel.MovieViewModel
 import javax.inject.Inject
 
 class MovieDetailFragment @Inject constructor(
@@ -15,6 +19,8 @@ class MovieDetailFragment @Inject constructor(
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
+    val args:MovieDetailFragmentArgs by navArgs()
+    lateinit var viewModel: MovieViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,12 +28,24 @@ class MovieDetailFragment @Inject constructor(
     ): View? {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         return binding.root
+    }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+        observeData()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    fun observeData(){
+        viewModel.getMovie(args.id)
+        viewModel.movieDetail.observe(viewLifecycleOwner, Observer {
+            binding.title.text=it.title
+        })
     }
 
 }

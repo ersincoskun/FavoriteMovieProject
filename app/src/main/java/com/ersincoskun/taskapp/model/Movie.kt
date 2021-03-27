@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Movie(
     @PrimaryKey(autoGenerate = true)
     val uuid: Long,
+    val id:Long,
     val adult: Boolean,
     val language: String,
     val title: String,

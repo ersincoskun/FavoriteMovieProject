@@ -10,7 +10,9 @@ interface MovieRepositoryInterface {
 
     suspend fun getMovie(id: Long): Movie
 
-    fun getMoviesFromDB(): List<Movie>
+    suspend fun getMoviesFromDB(): List<Movie>
 
     suspend fun getMoviesFromAPI(): Resource<Response>
+
+    suspend fun deleteAllMovies()
 }

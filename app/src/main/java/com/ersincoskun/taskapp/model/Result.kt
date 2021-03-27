@@ -3,6 +3,7 @@ package com.ersincoskun.taskapp.model
 import com.google.gson.annotations.SerializedName
 
 data class Result(
+    val id:Long,
     val adult: Boolean,
     @SerializedName("original_language")
     val language: String,

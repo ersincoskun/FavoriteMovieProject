@@ -2,17 +2,39 @@ package com.ersincoskun.taskapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.ersincoskun.taskapp.databinding.MovieItemBinding
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.util.Util.IMAGE_URL
+import com.ersincoskun.taskapp.view.FavoriteMoviesFragmentDirections
 import javax.inject.Inject
 
 class MovieRecyclerAdapter @Inject constructor(
     val glide: RequestManager
-) : RecyclerView.Adapter<MovieViewHolder>() {
-    lateinit var movies: List<Movie>
+) : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
+
+    private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var movies: List<Movie>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
+
+    class MovieViewHolder(val itemBinding: MovieItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val itemBinding =
@@ -24,7 +46,15 @@ class MovieRecyclerAdapter @Inject constructor(
         val imageUrl = "$IMAGE_URL${movies[position].img}"
         glide.load(imageUrl).into(holder.itemBinding.movieImage)
         holder.itemBinding.movieTitle.text = movies[position].title
+        holder.itemBinding.itemLayout.setOnClickListener {
+            val action =
+                FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailFragment(
+                    movies[position].id
+                )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
+
 
     override fun getItemCount(): Int {
         return movies.size
@@ -32,6 +62,5 @@ class MovieRecyclerAdapter @Inject constructor(
 
 }
 
-class MovieViewHolder(val itemBinding: MovieItemBinding) :
-    RecyclerView.ViewHolder(itemBinding.root)
+
 

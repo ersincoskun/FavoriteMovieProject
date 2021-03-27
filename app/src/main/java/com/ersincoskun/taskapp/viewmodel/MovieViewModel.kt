@@ -17,19 +17,17 @@ class MovieViewModel @Inject constructor(
     val movieRepository: MovieRepositoryInterface
 ) : ViewModel() {
 
-    private val _allMoviesFromDB = MutableLiveData<List<Movie>>()
-    val allMoviesFromDB: LiveData<List<Movie>>
-        get() = _allMoviesFromDB
+    private val _allMovies = MutableLiveData<List<Movie>>()
+    val allMovies: LiveData<List<Movie>>
+        get() = _allMovies
 
-    private val _allMoviesFromAPI = MutableLiveData<Resource<Response>>()
-    val allMoviesFromAPI: LiveData<Resource<Response>>
-        get() = _allMoviesFromAPI
 
     private val _movieDetail = MutableLiveData<Movie>()
     val movieDetail: LiveData<Movie>
         get() = _movieDetail
 
     fun saveAllMovies(list: List<Movie>) = viewModelScope.launch {
+        movieRepository.deleteAllMovies()
         movieRepository.saveAllMovies(list)
     }
 
@@ -38,14 +36,34 @@ class MovieViewModel @Inject constructor(
     }
 
     fun getMoviesFromDB() = viewModelScope.launch {
-        _allMoviesFromDB.value = movieRepository.getMoviesFromDB()
+        _allMovies.value = movieRepository.getMoviesFromDB()
     }
 
     fun getMoviesFromAPI() {
-        _allMoviesFromAPI.value = Resource.loading(null)
         viewModelScope.launch {
             val response = movieRepository.getMoviesFromAPI()
-            _allMoviesFromAPI.value = response
+            var newResponse = response.data!!.results.map {
+                var genreStringGenerator = ""
+                it.genre.forEach { genreId ->
+                    genreStringGenerator = "$genreStringGenerator,$genreId"
+                }
+                Movie(
+                    0,
+                    it.id,
+                    it.adult,
+                    it.language,
+                    it.title,
+                    it.overview,
+                    it.popularity,
+                    it.img,
+                    it.release,
+                    it.voteAverage,
+                    it.voteCount,
+                    genreStringGenerator
+                )
+            }
+            saveAllMovies(newResponse)
+            _allMovies.value = newResponse
         }
     }
 
