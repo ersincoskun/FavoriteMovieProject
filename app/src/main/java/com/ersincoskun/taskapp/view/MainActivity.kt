@@ -10,10 +10,10 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    private lateinit var fragmentFactory: MovieFragmentFactory
+    lateinit var fragmentFactory: MovieFragmentFactory
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentFactory
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 }

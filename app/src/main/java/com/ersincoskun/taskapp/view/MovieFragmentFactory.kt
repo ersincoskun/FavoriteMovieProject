@@ -12,7 +12,6 @@ class MovieFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
 
         return when (className) {
-            FavoriteMoviesFragment::class.java.name -> FavoriteMoviesFragment(glide)
             MovieDetailFragment::class.java.name -> MovieDetailFragment(glide)
             else -> super.instantiate(classLoader, className)
         }
