@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.RequestManager
 import com.ersincoskun.taskapp.databinding.FragmentMovieDetailBinding
+import javax.inject.Inject
 
-class MovieDetailFragment : Fragment() {
+class MovieDetailFragment @Inject constructor(
+    glide: RequestManager
+) : Fragment() {
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +27,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 
 }
