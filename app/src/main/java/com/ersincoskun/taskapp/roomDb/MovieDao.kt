@@ -16,6 +16,6 @@ interface MovieDao {
     suspend fun getMovie(id: Long): Movie
 
     @Query("SELECT * FROM movies")
-    fun observeMovies():LiveData<List<Movie>>
+    fun getMoviesFromDB(): List<Movie>
 
 }

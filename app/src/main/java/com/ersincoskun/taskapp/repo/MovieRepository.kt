@@ -1,6 +1,5 @@
 package com.ersincoskun.taskapp.repo
 
-import androidx.lifecycle.LiveData
 import com.ersincoskun.taskapp.api.RetrofitAPI
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.model.Response
@@ -21,11 +20,11 @@ class MovieRepository @Inject constructor(
         return dao.getMovie(id)
     }
 
-    override fun observeMovies(): LiveData<List<Movie>> {
-        return dao.observeMovies()
+    override fun getMoviesFromDB(): List<Movie> {
+        return dao.getMoviesFromDB()
     }
 
-    override suspend fun getMovies(): Resource<Response> {
+    override suspend fun getMoviesFromAPI(): Resource<Response> {
         return try {
             val response = retrofitAPI.getMovies()
             if (response.isSuccessful) {
