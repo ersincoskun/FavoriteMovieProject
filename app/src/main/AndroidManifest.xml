@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ersincoskun.taskapp">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".util.MoviesApplication"
@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskApp">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity"
+            android:label="Home"/>
+        <activity android:name=".view.SplashActivitiy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
