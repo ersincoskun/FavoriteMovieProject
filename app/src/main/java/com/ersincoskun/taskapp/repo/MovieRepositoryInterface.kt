@@ -2,7 +2,6 @@ package com.ersincoskun.taskapp.repo
 
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.model.Response
-import com.ersincoskun.taskapp.util.Resource
 
 interface MovieRepositoryInterface {
 
@@ -12,7 +11,7 @@ interface MovieRepositoryInterface {
 
     suspend fun getMoviesFromDB(): List<Movie>
 
-    suspend fun getMoviesFromAPI(): Resource<Response>
+    suspend fun getMoviesFromAPI(): Response
 
     suspend fun deleteAllMovies()
 }

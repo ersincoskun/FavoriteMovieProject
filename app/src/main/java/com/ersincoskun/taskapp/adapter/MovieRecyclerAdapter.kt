@@ -1,5 +1,6 @@
 package com.ersincoskun.taskapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -11,6 +12,7 @@ import com.ersincoskun.taskapp.databinding.MovieItemBinding
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.util.Util.IMAGE_URL
 import com.ersincoskun.taskapp.view.FavoriteMoviesFragmentDirections
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MovieRecyclerAdapter @Inject constructor(
@@ -44,7 +46,9 @@ class MovieRecyclerAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val imageUrl = "$IMAGE_URL${movies[position].img}"
-        glide.load(imageUrl).into(holder.itemBinding.movieImage)
+        Log.d("imageurl",imageUrl)
+        Picasso.get().load(imageUrl).into(holder.itemBinding.movieImage)
+        //glide.load("http://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg").into(holder.itemBinding.movieImage)
         holder.itemBinding.movieTitle.text = movies[position].title
         holder.itemBinding.itemLayout.setOnClickListener {
             val action =

@@ -4,7 +4,6 @@ import com.ersincoskun.taskapp.api.RetrofitAPI
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.model.Response
 import com.ersincoskun.taskapp.roomDb.MovieDao
-import com.ersincoskun.taskapp.util.Resource
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -25,19 +24,22 @@ class MovieRepository @Inject constructor(
     }
 
 
-    override suspend fun getMoviesFromAPI(): Resource<Response> {
-        return try {
+    override suspend fun getMoviesFromAPI(): Response {
+        val emptyResponse = Response(null, null)
+        try {
             val response = retrofitAPI.getMovies()
             if (response.isSuccessful) {
-                response.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error("Data Null", null)
+                if (response.body() != null) {
+                    return response.body() as Response
+                } else {
+                    return emptyResponse
+                }
             } else {
-                Resource.error("Error", null)
+                return emptyResponse
             }
-
         } catch (e: Exception) {
-            Resource.error("No Data", null)
+            e.printStackTrace()
+            return emptyResponse
         }
     }
 

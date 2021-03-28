@@ -19,7 +19,7 @@ class MovieDetailFragment @Inject constructor(
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
-    val args:MovieDetailFragmentArgs by navArgs()
+    val args: MovieDetailFragmentArgs by navArgs()
     lateinit var viewModel: MovieViewModel
 
     override fun onCreateView(
@@ -41,10 +41,18 @@ class MovieDetailFragment @Inject constructor(
         _binding = null
     }
 
-    fun observeData(){
+    fun observeData() {
         viewModel.getMovie(args.id)
         viewModel.movieDetail.observe(viewLifecycleOwner, Observer {
-            binding.title.text=it.title
+            binding.titleTv.text = it.title
+            binding.adultTv.text = if (it.adult) "Adults Only" else "Children and Adults"
+            binding.languageTv.text = "Original Language : ${it.language}"
+            binding.genreTv.text = viewModel.genreMapGenerator(it.genre)
+            binding.voteCountTv.text="Vote Count : ${it.voteCount}"
+            binding.voteAverageTv.text="Vote Count : ${it.voteAverage}"
+            binding.releaseTv.text="Release Date : ${it.release}"
+            binding.popularityTv.text="Popularity : ${it.popularity}"
+            binding.overviewTv.text=it.overview
         })
     }
 
