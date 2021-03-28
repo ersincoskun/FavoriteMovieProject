@@ -47,7 +47,7 @@ class MovieDetailFragment @Inject constructor(
             binding.titleTv.text = it.title
             binding.adultTv.text = if (it.adult) "Adults Only" else "Children and Adults"
             binding.languageTv.text = "Original Language : ${it.language}"
-            binding.genreTv.text = viewModel.genreMapGenerator(it.genre)
+            binding.genreTv.text = viewModel.genreConverter(it.genre)
             binding.voteCountTv.text="Vote Count : ${it.voteCount}"
             binding.voteAverageTv.text="Vote Count : ${it.voteAverage}"
             binding.releaseTv.text="Release Date : ${it.release}"

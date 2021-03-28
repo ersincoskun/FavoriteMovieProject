@@ -52,7 +52,6 @@ class MovieViewModel @Inject constructor(
                     for (i in 1 until it.genre.size) {
                         genreStringGenerator = "$genreStringGenerator,${it.genre[i]}"
                     }
-                    Log.d("genre", genreStringGenerator)
                     Movie(
                         it.id,
                         it.adult,
@@ -74,7 +73,7 @@ class MovieViewModel @Inject constructor(
         }
     }
 
-    fun genreMapGenerator(genreList: String): String {
+    fun genreConverter(genreList: String): String {
         val genreMap = mapOf<String, String>(
             "28" to "Action",
             "16" to "Animated",

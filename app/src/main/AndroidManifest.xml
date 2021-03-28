@@ -3,6 +3,7 @@
     package="com.ersincoskun.taskapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".util.MoviesApplication"
@@ -12,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskApp">
-        <activity android:name=".view.MainActivity"
-            android:label="Home"/>
-        <activity android:name=".view.SplashActivitiy">
+        <activity
+            android:name=".view.MainActivity"
+            android:label="Home" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
