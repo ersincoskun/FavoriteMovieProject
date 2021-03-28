@@ -35,7 +35,7 @@ class FavoriteMoviesFragment @Inject constructor(
         super.onStart()
         binding.favoriteMoviesRecyclerView.adapter = adapter
         viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
-        observeLiveDataFromAPI()
+        observeLiveData()
     }
 
     override fun onDestroy() {
@@ -43,15 +43,8 @@ class FavoriteMoviesFragment @Inject constructor(
         _binding = null
     }
 
-    fun observeLiveDataFromAPI() {
+    fun observeLiveData() {
         viewModel.getMoviesFromAPI()
-        viewModel.allMovies.observe(viewLifecycleOwner, Observer {
-            adapter.movies = it
-        })
-    }
-
-    fun observeLiveDataFromDB() {
-        viewModel.getMoviesFromDB()
         viewModel.allMovies.observe(viewLifecycleOwner, Observer {
             adapter.movies = it
         })

@@ -3,13 +3,14 @@ package com.ersincoskun.taskapp.repo
 import com.ersincoskun.taskapp.api.RetrofitAPI
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.model.Response
-import com.ersincoskun.taskapp.roomDb.MovieDao
+import com.ersincoskun.taskapp.roomdb.MovieDao
+import com.ersincoskun.taskapp.roomdb.MovieDatabase
 import java.lang.Exception
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
     val dao: MovieDao,
-    val retrofitAPI: RetrofitAPI
+    val retrofitAPI: RetrofitAPI,
 ) : MovieRepositoryInterface {
     override suspend fun saveAllMovies(list: List<Movie>) {
         dao.insertMovies(*list.toTypedArray())
@@ -21,6 +22,7 @@ class MovieRepository @Inject constructor(
 
     override suspend fun getMoviesFromDB(): List<Movie> {
         return dao.getMoviesFromDB()
+
     }
 
 
@@ -46,4 +48,5 @@ class MovieRepository @Inject constructor(
     override suspend fun deleteAllMovies() {
         dao.deleteAllMovies()
     }
+
 }

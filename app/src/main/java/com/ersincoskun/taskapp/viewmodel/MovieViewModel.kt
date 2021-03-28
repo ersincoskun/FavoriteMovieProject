@@ -54,7 +54,6 @@ class MovieViewModel @Inject constructor(
                     }
                     Log.d("genre", genreStringGenerator)
                     Movie(
-                        0,
                         it.id,
                         it.adult,
                         it.language,
@@ -97,9 +96,7 @@ class MovieViewModel @Inject constructor(
             "37" to "Western",
             "12" to "Adventure"
         )
-
         val myGenreList = genreList.split(",")
-        System.out.println(myGenreList)
         var newGenreString = genreMap[myGenreList[0]]
         for (i in 1 until myGenreList.size) {
             newGenreString = "$newGenreString , ${genreMap[myGenreList[i]]}"

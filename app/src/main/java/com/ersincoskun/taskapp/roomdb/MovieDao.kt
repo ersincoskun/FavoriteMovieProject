@@ -1,8 +1,6 @@
-package com.ersincoskun.taskapp.roomDb
+package com.ersincoskun.taskapp.roomdb
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.ersincoskun.taskapp.model.Movie
@@ -12,6 +10,9 @@ interface MovieDao {
 
     @Insert
     suspend fun insertMovies(vararg movies: Movie)
+
+    @Insert
+    suspend fun insertMovie(movie: Movie)
 
     @Query("SELECT * FROM movies WHERE id = :id")
     suspend fun getMovie(id: Long): Movie

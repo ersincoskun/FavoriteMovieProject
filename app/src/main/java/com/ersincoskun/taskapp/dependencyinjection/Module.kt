@@ -8,8 +8,8 @@ import com.ersincoskun.taskapp.R
 import com.ersincoskun.taskapp.api.RetrofitAPI
 import com.ersincoskun.taskapp.repo.MovieRepository
 import com.ersincoskun.taskapp.repo.MovieRepositoryInterface
-import com.ersincoskun.taskapp.roomDb.MovieDao
-import com.ersincoskun.taskapp.roomDb.MovieDatabase
+import com.ersincoskun.taskapp.roomdb.MovieDao
+import com.ersincoskun.taskapp.roomdb.MovieDatabase
 import com.ersincoskun.taskapp.util.Util.BASE_URL
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.ersincoskun.taskapp.roomDb
+package com.ersincoskun.taskapp.roomdb
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
