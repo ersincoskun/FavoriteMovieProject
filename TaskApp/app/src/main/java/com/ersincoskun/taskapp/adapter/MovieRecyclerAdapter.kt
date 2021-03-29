@@ -46,6 +46,9 @@ class MovieRecyclerAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val imageUrl = "$IMAGE_URL${movies[position].img}"
+        
+        // mailde belirttiğim gibi nedenini bilmediğim sebepten resimler yüklenmiyor bu yüzden film resimleri için bir image kullandım
+
         //Picasso.get().load(imageUrl).into(holder.itemBinding.movieImage)
         //glide.load("http://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg").into(holder.itemBinding.movieImage)
         holder.itemBinding.movieTitle.text = movies[position].title
