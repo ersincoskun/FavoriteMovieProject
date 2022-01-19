@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class MovieRecyclerAdapter @Inject constructor(
     val glide: RequestManager
-) : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieViewHolder>() {
 
     private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -35,9 +35,6 @@ class MovieRecyclerAdapter @Inject constructor(
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
-    class MovieViewHolder(val itemBinding: MovieItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val itemBinding =
             MovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -45,18 +42,7 @@ class MovieRecyclerAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val imageUrl = "$IMAGE_URL${movies[position].img}"
-        Log.d("imageurl",imageUrl)
-        Picasso.get().load(imageUrl).into(holder.itemBinding.movieImage)
-        //glide.load("http://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg").into(holder.itemBinding.movieImage)
-        holder.itemBinding.movieTitle.text = movies[position].title
-        holder.itemBinding.itemLayout.setOnClickListener {
-            val action =
-                FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailFragment(
-                    movies[position].id
-                )
-            Navigation.findNavController(it).navigate(action)
-        }
+        holder.bind(movies[position])
     }
 
 
@@ -64,6 +50,24 @@ class MovieRecyclerAdapter @Inject constructor(
         return movies.size
     }
 
+}
+
+class MovieViewHolder(val itemBinding: MovieItemBinding) :
+    RecyclerView.ViewHolder(itemBinding.root) {
+    fun bind(movie: Movie) {
+        val imageUrl = "$IMAGE_URL${movie.img}"
+        Log.d("imageurl", imageUrl)
+        Picasso.get().load(imageUrl).into(itemBinding.movieImage)
+        //glide.load("http://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg").into(holder.itemBinding.movieImage)
+        itemBinding.movieTitle.text = movie.title
+        itemBinding.itemLayout.setOnClickListener {
+            val action =
+                FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailFragment(
+                    movie.id
+                )
+            Navigation.findNavController(it).navigate(action)
+        }
+    }
 }
 
 
