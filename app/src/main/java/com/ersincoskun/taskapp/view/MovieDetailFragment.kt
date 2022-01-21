@@ -28,21 +28,21 @@ class MovieDetailFragment @Inject constructor(
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         observeData()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
-    fun observeData() {
+    private fun observeData() {
         viewModel.getMovie(args.id)
         viewModel.movieDetail.observe(viewLifecycleOwner, Observer {
             binding.apply {

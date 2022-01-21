@@ -16,14 +16,16 @@
         android:theme="@style/Theme.TaskApp">
         <activity
             android:name=".view.MainActivity"
-            android:label="Home" />
-        <activity android:name=".view.SplashActivity"
+            android:label="Home"
+            android:theme="@style/SplashScreen"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 
