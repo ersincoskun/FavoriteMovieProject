@@ -25,7 +25,7 @@ class FavoriteMoviesFragment @Inject constructor(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoriteMoviesBinding.inflate(inflater, container, false)
         return binding.root
 
