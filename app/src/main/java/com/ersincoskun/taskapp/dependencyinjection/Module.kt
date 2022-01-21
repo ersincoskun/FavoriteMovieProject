@@ -30,6 +30,7 @@ object Module {
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(context, MovieDatabase::class.java, "MoviesDb")
         .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
         .build()
 
     @Singleton
@@ -52,7 +53,7 @@ object Module {
     @Provides
     fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
         .setDefaultRequestOptions(
-            RequestOptions().placeholder(com.ersincoskun.taskapp.R.drawable.ic_launcher_foreground)
+            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background)
         )
 

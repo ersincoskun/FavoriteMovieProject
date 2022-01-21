@@ -3,7 +3,7 @@ package com.ersincoskun.taskapp.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "movies")
+@Entity(tableName = "MOVIES")
 data class Movie(
     val id: Long,
     val adult: Boolean,

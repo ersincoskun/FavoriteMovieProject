@@ -12,6 +12,7 @@ class MovieRepository @Inject constructor(
     val dao: MovieDao,
     val retrofitAPI: RetrofitAPI,
 ) : MovieRepositoryInterface {
+
     override suspend fun saveAllMovies(list: List<Movie>) {
         dao.insertMovies(*list.toTypedArray())
     }
@@ -21,8 +22,7 @@ class MovieRepository @Inject constructor(
     }
 
     override suspend fun getMoviesFromDB(): List<Movie> {
-        return dao.getMoviesFromDB()
-
+        return dao.getMoviesFromDB() ?: emptyList()
     }
 
 
@@ -33,6 +33,7 @@ class MovieRepository @Inject constructor(
             if (response.isSuccessful) {
                 if (response.body() != null) {
                     return response.body() as Response
+
                 } else {
                     return emptyResponse
                 }
