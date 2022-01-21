@@ -30,15 +30,15 @@ class MovieRepository @Inject constructor(
         val emptyResponse = Response(null, null)
         try {
             val response = retrofitAPI.getMovies()
-            if (response.isSuccessful) {
+            return if (response.isSuccessful) {
                 if (response.body() != null) {
-                    return response.body() as Response
+                    response.body() as Response
 
                 } else {
-                    return emptyResponse
+                    emptyResponse
                 }
             } else {
-                return emptyResponse
+                emptyResponse
             }
         } catch (e: Exception) {
             e.printStackTrace()
