@@ -12,6 +12,7 @@ This project is for api , test and dagger-hilt practice.In making this movie app
 * Lifecycle
 * Coroutines
 * Room Database
+* Clean Architecture
 
 ## Architecture
 * MVVM
