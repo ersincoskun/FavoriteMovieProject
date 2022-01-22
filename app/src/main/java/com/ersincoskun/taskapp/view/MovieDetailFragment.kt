@@ -39,8 +39,6 @@ class MovieDetailFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        requireActivity().actionBar?.setDisplayHomeAsUpEnabled(true)
-        requireActivity().actionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onDestroyView() {

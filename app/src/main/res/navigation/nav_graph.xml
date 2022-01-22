@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/favoriteMoviesFragment"
         android:name="com.ersincoskun.taskapp.view.FavoriteMoviesFragment"
-        android:label="fragment_favorite_movies"
+        android:label="@string/title_fragment_favorite_movies"
         tools:layout="@layout/fragment_favorite_movies" >
         <action
             android:id="@+id/action_favoriteMoviesFragment_to_movieDetailFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.ersincoskun.taskapp.view.MovieDetailFragment"
-        android:label="fragment_movie_detail"
+        android:label="@string/title_fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="id"
