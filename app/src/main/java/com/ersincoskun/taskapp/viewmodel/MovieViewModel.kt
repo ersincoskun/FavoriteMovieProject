@@ -25,7 +25,7 @@ class MovieViewModel @Inject constructor(
     val movieDetail: LiveData<Movie>
         get() = _movieDetail
 
-    fun saveAllMovies(list: List<Movie>) = viewModelScope.launch {
+    private fun saveAllMovies(list: List<Movie>) = viewModelScope.launch {
         movieRepository.deleteAllMovies()
         movieRepository.saveAllMovies(list)
     }
@@ -38,7 +38,7 @@ class MovieViewModel @Inject constructor(
         _allMovies.value = movieRepository.getMoviesFromDB()
     }
 
-    fun deleteAllMovies() = viewModelScope.launch {
+    private fun deleteAllMovies() = viewModelScope.launch {
         movieRepository.deleteAllMovies()
     }
 
@@ -46,23 +46,23 @@ class MovieViewModel @Inject constructor(
         viewModelScope.launch {
             val response = movieRepository.getMoviesFromAPI()
             response.results?.let {
-                var newResponse = it.map {
+                val newResponse = it.map { movie->
                     //i do this due to i can't save a list to db
-                    var genreStringGenerator = it.genre[0].toString()
-                    for (i in 1 until it.genre.size) {
-                        genreStringGenerator = "$genreStringGenerator,${it.genre[i]}"
+                    var genreStringGenerator = movie.genre[0].toString()
+                    for (i in 1 until movie.genre.size) {
+                        genreStringGenerator = "$genreStringGenerator,${movie.genre[i]}"
                     }
                     Movie(
-                        it.id,
-                        it.adult,
-                        it.language,
-                        it.title,
-                        it.overview,
-                        it.popularity,
-                        it.img,
-                        it.release,
-                        it.voteAverage,
-                        it.voteCount,
+                        movie.id,
+                        movie.adult,
+                        movie.language,
+                        movie.title,
+                        movie.overview,
+                        movie.popularity,
+                        movie.img,
+                        movie.release,
+                        movie.voteAverage,
+                        movie.voteCount,
                         genreStringGenerator
                     )
                 }

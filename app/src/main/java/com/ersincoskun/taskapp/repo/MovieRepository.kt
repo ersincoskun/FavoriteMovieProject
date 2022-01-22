@@ -33,7 +33,6 @@ class MovieRepository @Inject constructor(
             return if (response.isSuccessful) {
                 if (response.body() != null) {
                     response.body() as Response
-
                 } else {
                     emptyResponse
                 }

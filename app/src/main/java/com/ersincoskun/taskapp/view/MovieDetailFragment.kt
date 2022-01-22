@@ -24,7 +24,7 @@ class MovieDetailFragment @Inject constructor(
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
-    val args: MovieDetailFragmentArgs by navArgs()
+    private val args: MovieDetailFragmentArgs by navArgs()
     lateinit var viewModel: MovieViewModel
 
     override fun onCreateView(
