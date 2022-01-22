@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.RequestManager
+import com.ersincoskun.taskapp.R
 import com.ersincoskun.taskapp.databinding.FragmentMovieDetailBinding
 import com.ersincoskun.taskapp.util.Util
 import com.ersincoskun.taskapp.viewmodel.MovieViewModel
@@ -35,6 +39,8 @@ class MovieDetailFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
+        requireActivity().actionBar?.setDisplayHomeAsUpEnabled(true)
+        requireActivity().actionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onDestroyView() {

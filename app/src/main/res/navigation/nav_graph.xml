@@ -12,10 +12,9 @@
         tools:layout="@layout/fragment_favorite_movies" >
         <action
             android:id="@+id/action_favoriteMoviesFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment"
-            app:popUpTo="@+id/nav"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/movieDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.ersincoskun.taskapp.view.MovieDetailFragment"
