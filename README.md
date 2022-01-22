@@ -7,11 +7,13 @@ This project is for api , test and dagger-hilt practice.In making this movie app
 * Unit test
 * LiveData
 * ViewModel
+* Navigation
 * View Binding
 * Glide
 * Lifecycle
 * Coroutines
 * Room Database
+* Clean Architecture
 
 ## Architecture
 * MVVM
