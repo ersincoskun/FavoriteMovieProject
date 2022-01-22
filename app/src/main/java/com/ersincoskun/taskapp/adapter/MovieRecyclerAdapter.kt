@@ -12,7 +12,7 @@ import com.bumptech.glide.RequestManager
 import com.ersincoskun.taskapp.databinding.MovieItemBinding
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.util.Util.IMAGE_URL
-import com.ersincoskun.taskapp.view.FavoriteMoviesFragmentDirections
+import com.ersincoskun.taskapp.view.PopularMoviesFragmentDirections
 import javax.inject.Inject
 
 class MovieRecyclerAdapter @Inject constructor(
@@ -91,7 +91,7 @@ class MovieViewHolder(val itemBinding: MovieItemBinding, val glide: RequestManag
         itemBinding.movieTitle.text = movie.title
         itemBinding.itemLayout.setOnClickListener {
             val action =
-                FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailFragment(
+                PopularMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailFragment(
                     movie.id
                 )
             Navigation.findNavController(it).navigate(action)

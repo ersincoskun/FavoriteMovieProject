@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/favoriteMoviesFragment"
-        android:name="com.ersincoskun.taskapp.view.FavoriteMoviesFragment"
+        android:name="com.ersincoskun.taskapp.view.PopularMoviesFragment"
         android:label="@string/title_fragment_favorite_movies"
-        tools:layout="@layout/fragment_favorite_movies" >
+        tools:layout="@layout/fragment_popular_movies" >
         <action
             android:id="@+id/action_favoriteMoviesFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
