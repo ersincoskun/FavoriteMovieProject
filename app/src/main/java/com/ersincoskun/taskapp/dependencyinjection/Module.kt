@@ -53,8 +53,8 @@ object Module {
     @Provides
     fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
         .setDefaultRequestOptions(
-            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_background)
+            RequestOptions().placeholder(R.drawable.iv_movies)
+                .error(R.drawable.ic_warning)
         )
 
 }

@@ -82,7 +82,7 @@ class MovieRecyclerAdapter @Inject constructor(
 
 }
 
-class MovieViewHolder(val itemBinding: MovieItemBinding, val glide: RequestManager) :
+class MovieViewHolder(private val itemBinding: MovieItemBinding, val glide: RequestManager) :
     RecyclerView.ViewHolder(itemBinding.root) {
     fun bind(movie: Movie) {
         val imageUrl = "$IMAGE_URL${movie.img}"
