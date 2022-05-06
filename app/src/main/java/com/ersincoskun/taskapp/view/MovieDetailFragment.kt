@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
 import com.ersincoskun.taskapp.adapter.PersonListAdapter
@@ -76,7 +77,15 @@ class MovieDetailFragment @Inject constructor(
         gender: Int?,
         imageUrl: String?
     ) {
-
+        val direction =
+            MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
+                name ?: "",
+                imageUrl ?: "",
+                character ?: "",
+                (popularity ?: 0).toFloat(),
+                gender ?: 0
+            )
+        Navigation.findNavController(binding.personListRV).navigate(direction)
     }
 
 }

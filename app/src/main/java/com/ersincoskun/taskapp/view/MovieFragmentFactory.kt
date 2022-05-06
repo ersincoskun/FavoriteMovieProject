@@ -15,6 +15,7 @@ class MovieFragmentFactory @Inject constructor(
 
         return when (className) {
             MovieDetailFragment::class.java.name -> MovieDetailFragment(glide)
+            PersonDetailFragment::class.java.name -> PersonDetailFragment(glide)
             PopularMoviesFragment::class.java.name -> PopularMoviesFragment(movieRecyclerAdapter)
             else -> super.instantiate(classLoader, className)
         }

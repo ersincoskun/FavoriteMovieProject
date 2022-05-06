@@ -23,5 +23,29 @@
         <argument
             android:name="id"
             app:argType="long" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_personDetailFragment"
+            app:destination="@id/personDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailFragment"
+        android:name="com.ersincoskun.taskapp.view.PersonDetailFragment"
+        android:label="@string/title_fragment_person_detail"
+        tools:layout="@layout/fragment_person_detail" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <argument
+            android:name="character"
+            app:argType="string" />
+        <argument
+            android:name="popularity"
+            app:argType="float" />
+        <argument
+            android:name="gender"
+            app:argType="integer" />
     </fragment>
 </navigation>
