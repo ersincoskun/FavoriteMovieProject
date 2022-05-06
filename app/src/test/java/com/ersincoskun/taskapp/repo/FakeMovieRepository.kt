@@ -1,8 +1,6 @@
 package com.ersincoskun.taskapp.repo
 
 import com.ersincoskun.taskapp.model.Movie
-import com.ersincoskun.taskapp.model.Response
-import com.ersincoskun.taskapp.model.Result
 
 class FakeMovieRepository : MovieRepositoryInterface {
 

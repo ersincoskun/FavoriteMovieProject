@@ -63,7 +63,7 @@ class MovieRecyclerAdapter @Inject constructor(
                 filteredList.addAll(allRvItems)
             } else {
                 allRvItems.forEach {
-                    if (it.title.lowercase().contains(p0.toString().lowercase())) {
+                    if (it.title.lowercase().contains(p0.toString().lowercase()) || it.genre.lowercase().contains(p0.toString().lowercase()) || it.allPersonForSearch!!.lowercase().contains(p0.toString().lowercase())) {
                         filteredList.add(it)
                     }
                 }

@@ -1,10 +1,10 @@
 package com.ersincoskun.taskapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ersincoskun.taskapp.model.Cast
 import com.ersincoskun.taskapp.model.Movie
 import com.ersincoskun.taskapp.repo.MovieRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    val movieRepository: MovieRepositoryInterface
+    private val movieRepository: MovieRepositoryInterface
 ) : ViewModel() {
 
     private val _allMovies = MutableLiveData<List<Movie>>()
@@ -25,6 +25,10 @@ class MovieViewModel @Inject constructor(
     val movieDetail: LiveData<Movie>
         get() = _movieDetail
 
+    private val _personList = MutableLiveData<List<Cast>>()
+    val personList: LiveData<List<Cast>>
+        get() = _personList
+
     private fun saveAllMovies(list: List<Movie>) = viewModelScope.launch {
         movieRepository.deleteAllMovies()
         movieRepository.saveAllMovies(list)
@@ -32,6 +36,15 @@ class MovieViewModel @Inject constructor(
 
     fun getMovie(id: Long) = viewModelScope.launch {
         _movieDetail.value = movieRepository.getMovie(id)
+    }
+
+    fun getPersonList(movieId: Long) = viewModelScope.launch {
+        val emptyList = listOf<Cast>()
+        movieRepository.getPerson(movieId)?.let {
+            _personList.value=it.cast
+        } ?: kotlin.run {
+            _personList.value = emptyList
+        }
     }
 
     fun getMoviesFromDB() = viewModelScope.launch {
@@ -45,13 +58,26 @@ class MovieViewModel @Inject constructor(
     fun getMoviesFromAPI() {
         viewModelScope.launch {
             val response = movieRepository.getMoviesFromAPI()
-            response.results?.let {
-                val newResponse = it.map { movie->
+            response?.results?.let {
+                val newResponse = it.map { movie ->
                     //i do this due to i can't save a list to db
                     var genreStringGenerator = movie.genre[0].toString()
                     for (i in 1 until movie.genre.size) {
                         genreStringGenerator = "$genreStringGenerator,${movie.genre[i]}"
                     }
+
+                    val personResponse = movieRepository.getPerson(movie.id)
+                    var allPersonString: String? = ""
+                    try {
+                        allPersonString = personResponse?.cast?.get(0)?.name
+                        for (i in 1 until personResponse?.cast?.size!!) {
+                            allPersonString =
+                                "$allPersonString,${personResponse.cast[i].name}"
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                     Movie(
                         movie.id,
                         movie.adult,
@@ -63,7 +89,8 @@ class MovieViewModel @Inject constructor(
                         movie.release,
                         movie.voteAverage,
                         movie.voteCount,
-                        genreStringGenerator
+                        genreConverter(genreStringGenerator),
+                        allPersonString
                     )
                 }
                 deleteAllMovies()

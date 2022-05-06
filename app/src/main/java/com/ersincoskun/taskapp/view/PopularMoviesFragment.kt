@@ -1,6 +1,7 @@
 package com.ersincoskun.taskapp.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -51,8 +52,10 @@ class PopularMoviesFragment @Inject constructor(
     }
 
     private fun observeLiveData() {
+
         viewModel.getMoviesFromAPI()
         viewModel.allMovies.observe(viewLifecycleOwner, Observer {
+            Log.i("logdata",it.toString())
             adapter.allRvItems.clear()
             binding.moviesProgressBar.visibility = View.GONE
             adapter.movies = it
