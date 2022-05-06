@@ -21,7 +21,7 @@ class MovieRecyclerAdapter @Inject constructor(
 
     val allRvItems= mutableListOf<Movie>()
 
-    val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem == newItem
         }

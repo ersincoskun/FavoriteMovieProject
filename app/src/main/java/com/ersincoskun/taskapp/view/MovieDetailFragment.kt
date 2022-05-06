@@ -7,12 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.RequestManager
-import com.ersincoskun.taskapp.R
+import com.ersincoskun.taskapp.adapter.PersonListAdapter
 import com.ersincoskun.taskapp.databinding.FragmentMovieDetailBinding
 import com.ersincoskun.taskapp.util.Util
 import com.ersincoskun.taskapp.viewmodel.MovieViewModel
@@ -20,12 +17,13 @@ import javax.inject.Inject
 
 class MovieDetailFragment @Inject constructor(
     val glide: RequestManager
-) : Fragment() {
+) : Fragment(), Util.PersonClickAction {
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
     private val args: MovieDetailFragmentArgs by navArgs()
     lateinit var viewModel: MovieViewModel
+    private lateinit var adapter: PersonListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +31,13 @@ class MovieDetailFragment @Inject constructor(
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+        adapter = PersonListAdapter(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.personListRV.adapter = adapter
         observeData()
     }
 
@@ -63,6 +63,20 @@ class MovieDetailFragment @Inject constructor(
                 glide.load(imageUrl).into(movieDetailImage)
             }
         })
+        viewModel.getPersonList(args.id)
+        viewModel.personList.observe(viewLifecycleOwner) {
+            adapter.casts = it
+        }
+    }
+
+    override fun onItemClick(
+        name: String?,
+        popularity: Double?,
+        character: String?,
+        gender: Int?,
+        imageUrl: String?
+    ) {
+
     }
 
 }

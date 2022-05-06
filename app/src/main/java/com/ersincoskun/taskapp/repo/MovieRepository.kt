@@ -46,10 +46,10 @@ class MovieRepository @Inject constructor(
     }
 
     override suspend fun getPerson(movieId:Long): Person? {
-        val emptyPerson = Person(null, null)
-        try {
+        val emptyPerson = Person(listOf(), 0)
+        return try {
             val response = retrofitAPI.getPerson("3/movie/$movieId/credits?api_key=16ee8b7fb226f8c089aec47408dfc917")
-            return if (response.isSuccessful) {
+            if (response.isSuccessful) {
                 if (response.body() != null) {
                     response.body()
                 } else {
@@ -60,7 +60,7 @@ class MovieRepository @Inject constructor(
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            return emptyPerson
+            emptyPerson
         }
     }
 

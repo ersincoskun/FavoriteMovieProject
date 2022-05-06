@@ -54,9 +54,9 @@ data class Person(
 )
 
 data class Cast(
-    val genre: Int,
-    val name: String,
-    val movieId:Long,
+    val gender: Int?,
+    val name: String?,
+    val movieId:Long?,
     val character:String?,
     val popularity: Double?,
     @SerializedName("profile_path")
